@@ -14,17 +14,15 @@ datasource db {
 }
 
 model Transaction {
-  id String @id @default(uuid())
-  name String
-  type TransactionType
-  amount Decimal @db.Decimal(10, 2)
-  category TransactionCategory
+  id            String                   @id @default(uuid())
+  name          String
+  type          TransactionType
+  amount        Decimal                  @db.Decimal(10, 2)
+  category      TransactionCategory
   paymentMethod TransactionPaymentMethod
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
 }
-
 
 enum TransactionType {
   DEPOSIT
