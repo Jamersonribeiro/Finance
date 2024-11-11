@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { LogInIcon } from "lucide-react";
+import { Button } from "@/app/_components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -28,7 +27,7 @@ const LoginPage = async () => {
           facilitando o controle do seu orçamento.
         </p>
         <SignInButton>
-          <button variant="outline">Fazer login ou criar conta</button>
+          <Button variant="outline">Fazer login ou criar conta</Button>
         </SignInButton>
       </div>
 
