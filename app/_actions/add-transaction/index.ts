@@ -7,10 +7,11 @@ import {
   TransactionPaymentMethod,
   TransactionType,
 } from "@prisma/client";
-import { addTransactionSchema } from "./schema";
 import { revalidatePath } from "next/cache";
+import { upsertTransactionSchema } from "./schema";
 
-interface addTransactionParams {
+interface UpsertTransactionParams {
+  id?: string; // Optional, so it could be undefined
   name: string;
   amount: number;
   type: TransactionType;
@@ -19,15 +20,28 @@ interface addTransactionParams {
   date: Date;
 }
 
-export const addTransaction = async (params: addTransactionParams) => {
-  addTransactionSchema.parse(params);
+export const upsertTransaction = async (params: UpsertTransactionParams) => {
+  upsertTransactionSchema.parse(params); // Validate the input
 
   const { userId } = await auth();
   if (!userId) {
     throw new Error("unauthorized");
   }
-  await db.transaction.create({
-    data: { ...params, userId },
-  });
+
+  // Only upsert if `id` exists, otherwise create a new record
+  if (params.id) {
+    await db.transaction.upsert({
+      where: {
+        id: params.id, // Ensure `id` exists here
+      },
+      update: { ...params, userId },
+      create: { ...params, userId },
+    });
+  } else {
+    await db.transaction.create({
+      data: { ...params, userId }, // No `id`, so we create a new transaction
+    });
+  }
+
   revalidatePath("/transactions");
 };
