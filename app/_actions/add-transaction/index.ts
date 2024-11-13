@@ -31,11 +31,11 @@ export const upsertTransaction = async (params: UpsertTransactionParams) => {
   // Only upsert if `id` exists, otherwise create a new record
   if (params.id) {
     await db.transaction.upsert({
-      where: {
-        id: params.id, // A verificação do `id` é crucial aqui
-      },
       update: { ...params, userId },
       create: { ...params, userId },
+      where: {
+        id: params?.id ?? "", // A verificação do `id` é crucial aqui
+      },
     });
   } else {
     await db.transaction.create({
