@@ -32,7 +32,7 @@ export const upsertTransaction = async (params: UpsertTransactionParams) => {
   if (params.id) {
     await db.transaction.upsert({
       where: {
-        id: params.id, // Ensure `id` exists here
+        id: params.id, // A verificação do `id` é crucial aqui
       },
       update: { ...params, userId },
       create: { ...params, userId },
