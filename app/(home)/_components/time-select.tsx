@@ -10,27 +10,37 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 
 const MONTH_OPTION = [
-  { value: "01", label: "January" },
-  { value: "02", label: "February" },
-  { value: "03", label: "March" },
-  { value: "04", label: "April" },
-  { value: "05", label: "May" },
-  { value: "06", label: "June" },
-  { value: "07", label: "July" },
-  { value: "08", label: "August" },
-  { value: "09", label: "September" },
-  { value: "10", label: "October" },
-  { value: "11", label: "November" },
-  { value: "12", label: "December" },
+  { value: "01", label: "Janeiro" },
+  { value: "02", label: "Fevereiro" },
+  { value: "03", label: "Março" },
+  { value: "04", label: "Abril" },
+  { value: "05", label: "Maio" },
+  { value: "06", label: "Junho" },
+  { value: "07", label: "Julho" },
+  { value: "08", label: "Agosto" },
+  { value: "09", label: "Setembro" },
+  { value: "10", label: "Outubro" },
+  { value: "11", label: "Novembro" },
+  { value: "12", label: "Dezembro" },
+];
+
+const YEAR_OPTION = [
+  { value: "2024", label: "2024" },
+  { value: "2025", label: "2025" },
+  { value: "2026", label: "2026" },
+  { value: "2027", label: "2027" },
 ];
 
 const TimeSelect = () => {
   const { push } = useRouter();
   const searchParams = useSearchParams();
   const month = searchParams.get("month");
+  const year = searchParams.get("year") ?? new Date().getFullYear().toString(); // Mantém o ano atual se não houver valor
+
   const handleMonthChange = (month: string) => {
-    push(`/?month=${month}`);
+    push(`/?month=${month}&year=${year}`); // Inclui o ano ao atualizar o mês
   };
+
   return (
     <Select
       onValueChange={(value) => handleMonthChange(value)}
@@ -50,4 +60,40 @@ const TimeSelect = () => {
   );
 };
 
-export default TimeSelect;
+const YearSelect = () => {
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const month = searchParams.get("month");
+  const year = searchParams.get("year") ?? new Date().getFullYear().toString(); // Mantém o ano atual se não houver valor
+
+  const handleYearChange = (year: string) => {
+    push(`/?month=${month}&year=${year}`); // Inclui o mês ao atualizar o ano
+  };
+
+  return (
+    <Select
+      onValueChange={(value) => handleYearChange(value)}
+      defaultValue={year ?? ""}
+    >
+      <SelectTrigger className="w-[150px] rounded-full">
+        <SelectValue placeholder="Ano" />
+      </SelectTrigger>
+      <SelectContent>
+        {YEAR_OPTION.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
+export default function DashboardFilters() {
+  return (
+    <div className="flex space-x-4">
+      <TimeSelect />
+      <YearSelect />
+    </div>
+  );
+}

@@ -1,12 +1,10 @@
 import React, { forwardRef } from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
-import { Input, InputProps } from "@/app/_components/ui/input";
+import { Input } from "@/app/_components/ui/input"; // Confirme se o caminho está correto
 
-export const MoneyInput = forwardRef(
-  (
-    props: NumericFormatProps<InputProps>,
-    ref: React.ForwardedRef<HTMLInputElement>,
-  ) => {
+// Certifique-se de que InputProps está definido, caso contrário, remova se não for necessário.
+export const MoneyInput = forwardRef<HTMLInputElement, NumericFormatProps>(
+  (props, ref) => {
     return (
       <NumericFormat
         {...props}
@@ -15,7 +13,7 @@ export const MoneyInput = forwardRef(
         prefix="R$ "
         allowNegative={false}
         customInput={Input}
-        getInputRef={ref}
+        getInputRef={ref} // Certifique-se de que `getInputRef` é compatível
       />
     );
   },

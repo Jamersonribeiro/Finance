@@ -9,7 +9,7 @@ import SummaryCard from "./summury-card";
 interface SummaryCards {
   month: string;
   balance: number;
-  depositsTotal: number;
+  depositTotal: number;
   investmentsTotal: number;
   expensesTotal: number;
   userCanAddTransaction?: boolean;
@@ -17,7 +17,7 @@ interface SummaryCards {
 
 const SummaryCards = async ({
   balance,
-  depositsTotal,
+  depositTotal,
   expensesTotal,
   investmentsTotal,
   userCanAddTransaction,
@@ -26,13 +26,23 @@ const SummaryCards = async ({
     <div className="space-y-6">
       {/* PRIMEIRO CARD */}
 
-      <SummaryCard
-        icon={<WalletIcon size={16} />}
-        title="Saldo"
-        amount={balance}
-        size="large"
-        userCanAddTransaction={userCanAddTransaction}
-      />
+      <div className="grid grid-cols-2 gap-6">
+        <SummaryCard
+          icon={<WalletIcon size={16} />}
+          title="Saldo Total das Operações (em desenvolvimento)"
+          amount={balance}
+          size="large"
+          userCanAddTransaction={userCanAddTransaction}
+        />
+
+        <SummaryCard
+          icon={<WalletIcon size={16} />}
+          title="Saldo Mensal"
+          amount={balance}
+          size="large"
+          userCanAddTransaction={userCanAddTransaction}
+        />
+      </div>
 
       {/* OUTROS CARDS */}
       <div className="grid grid-cols-3 gap-6">
@@ -44,7 +54,7 @@ const SummaryCards = async ({
         <SummaryCard
           icon={<TrendingUpIcon size={16} className="text-primary" />}
           title="Receita"
-          amount={depositsTotal}
+          amount={depositTotal}
         />
         <SummaryCard
           icon={<TrendingDownIcon size={16} className="text-red-500" />}

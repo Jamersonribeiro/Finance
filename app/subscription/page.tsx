@@ -2,7 +2,7 @@ import { auth, clerkClient } from "@clerk/nextjs/server";
 import Navbar from "../_components/navbar";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader } from "../_components/ui/card";
-import { CheckIcon, XIcon } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 import AcquirePlanButton from "./_components/acquire-plan-button";
 import { Badge } from "../_components/ui/badge";
 import { getCurrentMonthTransactions } from "../_data/get-current-month-transactions";
@@ -41,8 +41,8 @@ const SubscriptionPage = async () => {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <XIcon />
-                <p>Relatórios de IA</p>
+                <CheckIcon className="text-primary" />
+                <p>Dashboards Categorizados</p>
               </div>
             </CardContent>
           </Card>
@@ -68,11 +68,99 @@ const SubscriptionPage = async () => {
                 <CheckIcon className="text-primary" />
                 <p>Transações ilimitadas</p>
               </div>
+
               <div className="flex items-center gap-2">
                 <CheckIcon className="text-primary" />
                 <p>Relatórios de IA</p>
               </div>
+
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Dashboards Categorizados</p>
+              </div>
+
               <AcquirePlanButton />
+            </CardContent>
+          </Card>
+
+          <Card className="w-[450px]">
+            <CardHeader className="border-b border-solid py-8">
+              <h2 className="text-center text-2xl font-semibold">Plano Pro</h2>
+
+              <div className="flex items-center justify-center gap-3 text-4xl font-bold">
+                EM BREVE
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 py-8">
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Transações Ilimitadas</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Relatórios de IA</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Dashboards Categorizados</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                Receber Relatórios detalhados por e-mail
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Análise de Fluxo de Caixa</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="w-[450px]">
+            <CardHeader className="border-b border-solid py-8">
+              <h2 className="text-center text-2xl font-semibold">
+                Plano Pro Plus
+              </h2>
+              <div className="flex items-center justify-center gap-3 text-4xl font-bold">
+                EM BREVE
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 py-8">
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Transações Ilimitadas</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Relatórios de IA</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Dashboards Categorizados</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                Receber Relatórios detalhados por e-mail
+              </div>
+
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                <p>Análise de Fluxo de Caixa</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                Previsão de despesas
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                Notificação de vencimentos
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="text-primary" />
+                Exportar dados
+              </div>
             </CardContent>
           </Card>
         </div>
