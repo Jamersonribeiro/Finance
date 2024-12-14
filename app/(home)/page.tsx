@@ -56,10 +56,12 @@ const Home = async ({ searchParams }: HomeProps) => {
           <div className="flex items-center gap-3">
             <AiReportButton
               month={month}
+              year={year} // Passa também o ano
               hasPremiumPlan={
                 user.publicMetadata.subscriptionPlan === "premium"
               }
             />
+
             <DashboardFilters />
           </div>
         </div>

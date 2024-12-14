@@ -21,15 +21,21 @@ import { generateAiReport } from "../_actions/generate-ai-report";
 interface AiReportButtonProps {
   hasPremiumPlan: boolean;
   month: string;
+  year: string; // Adicionar o ano como propriedade
 }
 
-const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
+const AiReportButton = ({
+  month,
+  year,
+  hasPremiumPlan,
+}: AiReportButtonProps) => {
   const [report, setReport] = useState<string | null>(null);
   const [reportIsLoading, setReportIsLoading] = useState(false);
+
   const handleGenerateReportClick = async () => {
     try {
       setReportIsLoading(true);
-      const aiReport = await generateAiReport({ month });
+      const aiReport = await generateAiReport({ month, year }); // Passar também o ano
       console.log({ aiReport });
       setReport(aiReport);
     } catch (error) {
@@ -38,6 +44,7 @@ const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
       setReportIsLoading(false);
     }
   };
+
   return (
     <Dialog
       onOpenChange={(open) => {
