@@ -18,12 +18,12 @@ const SubscriptionPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen space-y-6 p-6">
+      <div className="min-h-screen space-y-6 overflow-y-auto p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
-        {/* Container com rolagem somente no celular */}
-        <div className="flex flex-col overflow-x-auto overflow-y-auto sm:flex-row sm:gap-6 sm:overflow-x-hidden sm:overflow-y-hidden">
-          <Card className="w-full sm:w-[450px]">
+        {/* Container com rolagem apenas no celular, empilhando os cards */}
+        <div className="flex flex-col overflow-x-hidden sm:flex-row sm:gap-6">
+          <Card className="mb-6 w-full sm:w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
                 Plano Básico
@@ -48,7 +48,7 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
 
-          <Card className="w-full sm:w-[450px]">
+          <Card className="mb-6 w-full sm:w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">
               {hasPremiumPlan && (
                 <Badge className="absolute left-4 top-12 bg-primary/10 text-primary">
@@ -84,7 +84,7 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
 
-          <Card className="w-full sm:w-[450px]">
+          <Card className="mb-6 w-full sm:w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">Plano Pro</h2>
 
@@ -117,7 +117,7 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
 
-          <Card className="w-full sm:w-[450px]">
+          <Card className="mb-6 w-full sm:w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
                 Plano Pro Plus
