@@ -35,9 +35,10 @@ export const generateAiReport = async ({
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  // Ajuste para buscar transações com base no mês e ano selecionados
+  // Ajuste para buscar transações com base no mês, ano e userId
   const transactions = await db.transaction.findMany({
     where: {
+      userId: userId, // Filtra apenas transações do usuário logado
       date: {
         gte: new Date(`${year}-${month}-01`),
         lt: new Date(`${year}-${month}-31`),
