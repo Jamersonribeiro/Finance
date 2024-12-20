@@ -4,15 +4,36 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <nav className="flex flex-wrap items-center justify-between border-b border-solid px-4 py-4">
+    <nav className="flex items-center justify-between border-b border-solid px-4 py-4">
       {/* ESQUERDA - Logotipo e Links */}
-      <div className="flex w-full items-center gap-6 sm:w-auto">
+      <div className="flex w-full items-center justify-between sm:w-auto">
         <Image src="/logo.png" width={173} height={39} alt="Finance AI" />
-        <div className="flex w-full items-center gap-4 sm:w-auto">
+        <div className="flex items-center gap-6 sm:w-auto">
+          {/* Menu Hamburguer para Mobile */}
+          <button className="text-primary sm:hidden" onClick={toggleMobileMenu}>
+            {isMobileMenuOpen ? "Fechar" : "Menu"}
+          </button>
+        </div>
+      </div>
+
+      {/* LINKS - Visíveis em desktop e mobile */}
+      <div
+        className={`${
+          isMobileMenuOpen ? "block" : "hidden"
+        } w-full sm:flex sm:w-auto sm:items-center sm:gap-6`}
+      >
+        <div className="flex w-full items-center gap-4 overflow-x-auto sm:w-auto sm:justify-start">
           <Link
             href="/"
             className={
