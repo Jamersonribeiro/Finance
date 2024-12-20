@@ -17,12 +17,16 @@ const SubscriptionPage = async () => {
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan == "premium";
   return (
     <>
-      <Navbar />
-      <div className="min-h-screen space-y-6 overflow-y-auto p-6">
+      {/* A barra de rolagem horizontal será aplicada apenas no celular */}
+      <div className="overflow-x-auto sm:overflow-x-hidden">
+        <Navbar />
+      </div>
+
+      <div className="min-h-screen space-y-6 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
-        {/* Container com rolagem apenas no celular, empilhando os cards */}
-        <div className="flex flex-col overflow-x-hidden sm:flex-row sm:gap-6">
+        {/* Container com rolagem horizontal somente no celular */}
+        <div className="flex flex-col overflow-x-auto sm:flex-row sm:gap-6 sm:overflow-x-hidden">
           <Card className="mb-6 w-full sm:w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
