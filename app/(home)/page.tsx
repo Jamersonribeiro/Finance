@@ -65,21 +65,21 @@ const Home = async ({ searchParams }: HomeProps) => {
               <DashboardFilters />
             </div>
           </div>
-          <div className="flex flex-col gap-6">
-            {/* SummaryCards em layout vertical para mobile */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-[2fr,1fr]">
+            <div className="flex flex-col gap-6">
               <SummaryCards
                 month={month}
                 {...dashboard}
                 userCanAddTransaction={userCanAddTransaction}
               />
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <TransactionsPieChart {...dashboard} />
+                <ExpensesPerCategory
+                  expensesPerCategory={dashboard.totalExpensePerCategory}
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <TransactionsPieChart {...dashboard} />
-              <ExpensesPerCategory
-                expensesPerCategory={dashboard.totalExpensePerCategory}
-              />
-            </div>
+            {/* Últimas Transações permanece à direita */}
             <LastTransactions lastTransactions={dashboard.lastTransactions} />
           </div>
         </div>

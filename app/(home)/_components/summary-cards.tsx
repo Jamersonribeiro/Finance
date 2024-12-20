@@ -29,14 +29,6 @@ const SummaryCards = async ({
       <div className="grid grid-cols-2 gap-6">
         <SummaryCard
           icon={<WalletIcon size={16} />}
-          title="Saldo Total das Operações (em desenvolvimento)"
-          amount={balance}
-          size="large"
-          userCanAddTransaction={userCanAddTransaction}
-        />
-
-        <SummaryCard
-          icon={<WalletIcon size={16} />}
           title="Saldo Mensal"
           amount={balance}
           size="large"
