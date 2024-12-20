@@ -8,40 +8,42 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-wrap items-center justify-between border-b border-solid px-8 py-4">
+    <nav className="flex items-center justify-between border-b border-solid px-4 py-4">
       {/* ESQUERDA - Logotipo e Links */}
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-6">
         <Image src="/logo.png" width={173} height={39} alt="Finance AI" />
-        <Link
-          href="/"
-          className={
-            pathname === "/"
-              ? "font-bold text-primary"
-              : "text-muted-foreground"
-          }
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="/transactions"
-          className={
-            pathname === "/transactions"
-              ? "font-bold text-primary"
-              : "text-muted-foreground"
-          }
-        >
-          Transações
-        </Link>
-        <Link
-          href="/subscription"
-          className={
-            pathname === "/subscription"
-              ? "font-bold text-primary"
-              : "text-muted-foreground"
-          }
-        >
-          Assinatura
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/"
+            className={
+              pathname === "/"
+                ? "font-bold text-primary"
+                : "text-muted-foreground"
+            }
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/transactions"
+            className={
+              pathname === "/transactions"
+                ? "font-bold text-primary"
+                : "text-muted-foreground"
+            }
+          >
+            Transações
+          </Link>
+          <Link
+            href="/subscription"
+            className={
+              pathname === "/subscription"
+                ? "font-bold text-primary"
+                : "text-muted-foreground"
+            }
+          >
+            Assinatura
+          </Link>
+        </div>
       </div>
 
       {/* DIREITA - UserButton */}
