@@ -22,7 +22,7 @@ const SubscriptionPage = async () => {
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
         {/* Container com rolagem somente no celular */}
-        <div className="flex min-w-full flex-col overflow-x-auto overflow-y-auto sm:flex-row sm:gap-6 sm:overflow-x-hidden sm:overflow-y-hidden">
+        <div className="flex flex-col overflow-x-auto overflow-y-auto sm:flex-row sm:gap-6 sm:overflow-x-hidden sm:overflow-y-hidden">
           <Card className="w-full sm:w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
