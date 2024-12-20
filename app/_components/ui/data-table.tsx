@@ -32,8 +32,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="rounded-md border">
-      <Table>
+    <div className="w-full overflow-x-auto rounded-md border">
+      <Table className="min-w-[800px]">
+        {" "}
+        {/* A tabela terá um mínimo de largura, podendo ser ajustado */}
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
