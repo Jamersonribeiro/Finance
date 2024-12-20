@@ -18,7 +18,7 @@ const SubscriptionPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="space-y-6 p-6">
+      <div className="min-h-screen space-y-6 overflow-y-auto p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
         <div className="flex flex-col sm:flex-row sm:gap-6">
