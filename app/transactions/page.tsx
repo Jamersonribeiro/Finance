@@ -28,8 +28,12 @@ const TransactionsPage = async () => {
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         </div>
+
+        {/* Scroll Area com rolagem vertical e horizontal */}
         <ScrollArea>
-          <DataTable columns={transactionColumns} data={transactions} />
+          <div className="max-w-full overflow-x-auto">
+            <DataTable columns={transactionColumns} data={transactions} />
+          </div>
         </ScrollArea>
       </div>
     </>
