@@ -9,8 +9,8 @@ const Navbar = () => {
   const pathname = usePathname();
   return (
     <nav className="flex flex-wrap items-center justify-between border-b border-solid px-8 py-4">
-      {/* ESQUERDA */}
-      <div className="flex min-w-0 items-center gap-10">
+      {/* ESQUERDA - Logotipo e Links */}
+      <div className="flex items-center gap-10">
         <Image src="/logo.png" width={173} height={39} alt="Finance AI" />
         <Link
           href="/"
@@ -43,8 +43,9 @@ const Navbar = () => {
           Assinatura
         </Link>
       </div>
+
       {/* DIREITA - UserButton */}
-      <div className="ml-auto mt-2 sm:mt-0">
+      <div className="ml-auto">
         <UserButton showName />
       </div>
     </nav>
