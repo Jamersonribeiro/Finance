@@ -31,8 +31,8 @@ const TransactionsPage = async () => {
         </div>
 
         {/* Scroll Area com rolagem vertical e horizontal */}
-        <ScrollArea>
-          <div className="w-full overflow-x-auto">
+        <ScrollArea className="w-full">
+          <div className="overflow-x-auto">
             {/* A tabela deve ser responsiva */}
             <div className="min-w-full sm:min-w-[800px]">
               <DataTable columns={transactionColumns} data={transactions} />
