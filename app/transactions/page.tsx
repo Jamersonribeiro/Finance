@@ -19,21 +19,22 @@ const TransactionsPage = async () => {
     },
   });
   const userCanAddTransaction = await canUserAddTransaction();
+
   return (
     <>
       <Navbar />
-      <div className="space-y-6 overflow-auto p-6">
+      <div className="space-y-6 p-4 sm:p-6">
         {/* TÍTULO E BOTÃO */}
-        <div className="flex w-full items-center justify-between">
-          <h1 className="text-2xl font-bold">Transações</h1>
+        <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <h1 className="text-xl font-bold sm:text-2xl">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         </div>
 
         {/* Scroll Area com rolagem vertical e horizontal */}
         <ScrollArea>
           <div className="w-full overflow-x-auto">
-            {/* A tabela deve ter uma largura mínima maior que a largura da tela */}
-            <div className="min-w-[800px]">
+            {/* A tabela deve ser responsiva */}
+            <div className="min-w-full sm:min-w-[800px]">
               <DataTable columns={transactionColumns} data={transactions} />
             </div>
           </div>
