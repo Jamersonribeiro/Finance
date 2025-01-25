@@ -39,23 +39,26 @@ export const generateAiReport = async ({
   generateAiReportSchema.parse({ month, year });
 
   const { userId } = await auth();
+  console.log("UserID:", userId); // Log para verificar o userId
   if (!userId) {
     throw new Error("Unauthorized");
   }
 
   const user = await clerkClient().users.getUser(userId);
+  console.log("Plano do usuário:", user.publicMetadata.subscriptionPlan); // Verifique o plano do usuário
+
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
   if (!hasPremiumPlan) {
     throw new Error("You need a premium plan to generate AI reports");
   }
 
   // Garantir que o userId seja válido antes de usar na consulta
-  if (userId === null) {
+  if (!userId) {
     throw new Error("Invalid userId");
   }
 
-  return DUMMY_REPORT;
-
+  // Verificando se a chave de API do OpenAI está definida
+  console.log("API Key do OpenAI:", process.env.OPENAI_API_KEY); // Verifique se a chave de API está correta
   if (!process.env.OPENAI_API_KEY) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return DUMMY_REPORT;
@@ -66,6 +69,8 @@ export const generateAiReport = async ({
   });
 
   // Ajuste para buscar transações com base no mês, ano e userId
+  console.log("Consultando transações...");
+
   const transactions = await db.transaction.findMany({
     where: {
       userId: userId as string, // Garantir que o userId seja tratado como string
@@ -76,6 +81,8 @@ export const generateAiReport = async ({
     },
     take: 1000, // Limite de transações para não sobrecarregar
   });
+
+  console.log("Transações encontradas:", transactions); // Verifique as transações retornadas
 
   // Criar conteúdo para o ChatGPT
   const content = `Gere um relatório com insights sobre as minhas finanças, com dicas e orientações de como melhorar minha vida financeira. As transações estão divididas por ponto e vírgula. A estrutura de cada uma é {DATA}-{TIPO}-{VALOR}-{CATEGORIA}. São elas:
@@ -104,6 +111,7 @@ export const generateAiReport = async ({
       });
     });
 
+    console.log("Resposta do OpenAI:", completion); // Verifique a resposta do OpenAI
     return completion.choices[0].message.content;
   } catch (error) {
     console.error("Erro ao gerar o relatório de IA:", error);
