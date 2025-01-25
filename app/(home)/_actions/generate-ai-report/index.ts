@@ -9,7 +9,7 @@ import { generateAiReportSchema, GenerateAiReportSchema } from "./schema";
 const retryRequest = async <T>(
   fn: () => Promise<T>,
   retries = 3,
-  delay = 1000,
+  delay = 10000,
 ): Promise<T> => {
   let lastError: unknown = null;
   for (let attempt = 0; attempt < retries; attempt++) {
