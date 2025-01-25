@@ -55,20 +55,37 @@ export const generateAiReport = async ({
       )
       .join(";")}`;
 
-  const completion = await openAi.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      {
-        role: "system",
-        content:
-          "Você é um especialista em gestão e organização de finanças pessoais. Você ajuda as pessoas a organizarem melhor as suas finanças.",
-      },
-      {
-        role: "user",
-        content,
-      },
-    ],
-  });
+  // Implementação do Retry
+  const retry = async (fn, retries = 3, delay = 1000) => {
+    try {
+      return await fn();
+    } catch (error) {
+      if (retries > 0) {
+        console.warn(`Retrying due to error: ${error.message}`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        return retry(fn, retries - 1, delay * 2);
+      } else {
+        throw error;
+      }
+    }
+  };
+
+  const completion = await retry(() =>
+    openAi.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "Você é um especialista em gestão e organização de finanças pessoais. Você ajuda as pessoas a organizarem melhor as suas finanças.",
+        },
+        {
+          role: "user",
+          content,
+        },
+      ],
+    }),
+  );
 
   return completion.choices[0].message.content;
 };
